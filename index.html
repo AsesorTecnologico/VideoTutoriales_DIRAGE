@@ -22,6 +22,7 @@
             --success-color: #27ae60;
             --card-bg: #ffffff;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.15);
         }
 
         body {
@@ -31,7 +32,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -51,6 +52,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .logo {
@@ -73,231 +76,446 @@
             color: var(--accent-color);
         }
 
-        nav ul {
+        .header-stats {
             display: flex;
-            list-style: none;
-            gap: 25px;
+            gap: 20px;
+            background: rgba(255,255,255,0.1);
+            padding: 8px 20px;
+            border-radius: 40px;
         }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 12px;
-            border-radius: 4px;
-            transition: all 0.3s;
-        }
-
-        nav a:hover, nav a.active {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Main content */
-        .main-content {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        @media (max-width: 992px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Sidebar */
-        .sidebar {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            padding: 25px;
-            height: fit-content;
-        }
-
-        .section-title {
+        .header-stat {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--light-color);
-            padding-bottom: 10px;
+            gap: 8px;
+            font-size: 14px;
         }
 
-        .section-title i {
-            color: var(--secondary-color);
-        }
-
-        .theme-list {
-            list-style: none;
-            margin-bottom: 30px;
-        }
-
-        .theme-item {
-            padding: 12px 15px;
-            margin-bottom: 8px;
-            background-color: var(--light-color);
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .theme-item:hover {
-            background-color: #e0e6ea;
-            transform: translateX(5px);
-        }
-
-        .theme-item.active {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-
-        .theme-count {
-            background-color: white;
-            color: var(--primary-color);
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .active .theme-count {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        /* Contenido principal */
-        .content {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            padding: 25px;
-        }
-
-        /* Barra de búsqueda */
-        .search-bar {
-            display: flex;
-            margin-bottom: 25px;
-            gap: 10px;
-        }
-
-        .search-bar input {
-            flex: 1;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+        .header-stat i {
             font-size: 16px;
         }
 
-        .search-btn {
-            padding: 12px 20px;
-            background-color: var(--primary-color);
+        .header-stat .number {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .connection-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .connected { background-color: #28a745; color: white; }
+        .disconnected { background-color: #dc3545; color: white; }
+
+        /* Search Hero Section */
+        .search-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
             color: white;
+            text-align: center;
+        }
+
+        .search-hero h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .search-hero p {
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+
+        .search-container {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 15px 25px;
             border: none;
-            border-radius: 5px;
+            border-radius: 50px;
+            font-size: 16px;
+            outline: none;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        .search-container input:focus {
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
+        }
+
+        .search-container i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 18px;
+        }
+
+        .search-info {
+            margin-top: 15px;
+            font-size: 13px;
+            opacity: 0.8;
+        }
+
+        /* Filters Bar */
+        .filters-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .filters-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .filters-header h3 {
+            color: var(--primary-color);
+            font-size: 16px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-chip {
+            padding: 6px 16px;
+            border-radius: 20px;
+            background: var(--light-color);
             cursor: pointer;
+            transition: all 0.2s;
+            font-size: 13px;
+            border: none;
         }
 
-        /* Grid de videos */
-        .video-grid {
+        .filter-chip:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .filter-chip.active {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        /* Resultados de búsqueda */
+        .search-results-info {
+            background: white;
+            border-radius: 15px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .results-count {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .results-count strong {
+            color: var(--secondary-color);
+            font-size: 18px;
+        }
+
+        .clear-search {
+            background: none;
+            border: none;
+            color: var(--secondary-color);
+            cursor: pointer;
+            font-size: 13px;
+            padding: 5px 10px;
+            border-radius: 15px;
+            transition: all 0.2s;
+        }
+
+        .clear-search:hover {
+            background: var(--light-color);
+        }
+
+        /* Stats Cards */
+        .stats-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
         }
 
-        .video-card {
-            background-color: white;
-            border-radius: 8px;
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card i {
+            font-size: 35px;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .stat-card .value {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .stat-card .label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Theme Grid - Vista por sectores */
+        .themes-section {
+            margin-bottom: 40px;
+        }
+
+        .theme-section {
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 30px;
             overflow: hidden;
             box-shadow: var(--shadow);
+        }
+
+        .theme-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 15px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .theme-header:hover {
+            background: linear-gradient(135deg, #1a252f, #2471a3);
+        }
+
+        .theme-header h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+        }
+
+        .theme-header .count {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .theme-header i.fa-chevron-down {
+            transition: transform 0.3s;
+        }
+
+        .theme-header.collapsed i.fa-chevron-down {
+            transform: rotate(-90deg);
+        }
+
+        .theme-videos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 25px;
             transition: all 0.3s;
+        }
+
+        .theme-videos.collapsed {
+            display: none;
+        }
+
+        /* Video Cards - Estilo mejorado */
+        .video-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 1px solid #eee;
         }
 
         .video-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--shadow-hover);
         }
 
         .video-thumbnail {
             position: relative;
-            height: 180px;
+            height: 160px;
             overflow: hidden;
+            background: #000;
         }
 
         .video-thumbnail img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .video-card:hover .video-thumbnail img {
+            transform: scale(1.05);
         }
 
         .video-duration {
             position: absolute;
             bottom: 8px;
             right: 8px;
-            background-color: rgba(0, 0, 0, 0.8);
+            background: rgba(0,0,0,0.8);
             color: white;
-            padding: 3px 6px;
-            border-radius: 3px;
-            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .video-card:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .play-overlay i {
+            color: white;
+            font-size: 24px;
         }
 
         .video-info {
             padding: 15px;
         }
 
-        .video-theme {
-            display: inline-block;
-            background-color: var(--light-color);
-            color: var(--primary-color);
-            padding: 4px 10px;
-            border-radius: 15px;
-            font-size: 12px;
-            margin-bottom: 10px;
-        }
-
         .video-title {
             font-weight: 600;
+            font-size: 15px;
             margin-bottom: 8px;
-            font-size: 16px;
             line-height: 1.4;
-        }
-
-        .video-description {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 15px;
-            line-height: 1.5;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
 
-        .video-actions {
+        .video-description {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .video-meta {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-size: 11px;
+            color: #999;
         }
 
-        .video-date {
-            font-size: 12px;
-            color: #888;
+        .video-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 8px;
         }
 
-        .action-btn {
-            background: none;
-            border: none;
+        .tag {
+            background: var(--light-color);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            color: var(--primary-color);
+        }
+
+        /* Quick Stats Bar */
+        .quick-stats {
+            background: white;
+            border-radius: 15px;
+            padding: 15px 25px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .quick-stat-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quick-stat-item i {
+            font-size: 20px;
             color: var(--secondary-color);
-            cursor: pointer;
-            font-size: 14px;
         }
 
-        /* Modal para ver video */
+        .quick-stat-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .quick-stat-value {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .quick-stat-label {
+            font-size: 11px;
+            color: #666;
+        }
+
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -305,7 +523,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.9);
             z-index: 1000;
             align-items: center;
             justify-content: center;
@@ -313,23 +531,23 @@
 
         .modal-content {
             background-color: white;
-            border-radius: 10px;
+            border-radius: 20px;
             width: 90%;
-            max-width: 900px;
+            max-width: 1000px;
             max-height: 90vh;
             overflow-y: auto;
-            padding: 25px;
         }
 
         .modal-header {
+            padding: 20px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
         }
 
         .close-modal {
-            font-size: 28px;
+            font-size: 32px;
             cursor: pointer;
             color: #888;
             transition: color 0.3s;
@@ -343,7 +561,6 @@
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
-            margin-bottom: 20px;
         }
 
         .video-container iframe {
@@ -352,119 +569,24 @@
             left: 0;
             width: 100%;
             height: 100%;
-            border-radius: 5px;
         }
 
-        /* Footer */
-        footer {
-            background-color: var(--primary-color);
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
+        .modal-info {
+            padding: 20px 25px;
         }
 
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 20px;
-        }
-
-        .footer-links a {
-            color: white;
-            text-decoration: none;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-color);
-        }
-
-        /* Páginas de documentación */
-        .docs-content {
-            margin-top: 30px;
-        }
-
-        .doc-card {
-            background-color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow);
-        }
-
-        .doc-card h3 {
-            color: var(--primary-color);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .doc-card p {
-            margin-bottom: 15px;
-        }
-
-        .doc-link {
-            color: var(--secondary-color);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .doc-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Status indicators */
-        .status-active {
-            color: var(--success-color);
-            font-weight: bold;
-        }
-
-        .status-inactive {
-            color: #999;
-        }
-
-        /* Configuración de conexión */
-        .connection-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            padding: 4px 10px;
-            border-radius: 15px;
-            font-size: 12px;
-            margin-left: 10px;
-        }
-
-        .connected {
-            background-color: #d4edda;
-            color: #155724;
-        }
-
-        .disconnected {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
-
-        /* Mensajes de carga */
+        /* Loading */
         .loading-message {
             text-align: center;
-            padding: 40px;
-            color: #666;
-            font-size: 16px;
+            padding: 60px;
         }
 
         .loading-spinner {
             border: 4px solid rgba(0, 0, 0, 0.1);
             border-radius: 50%;
             border-top: 4px solid var(--secondary-color);
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             animation: spin 1s linear infinite;
             margin: 0 auto 20px;
         }
@@ -474,177 +596,140 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Mensajes de alerta */
+        /* Alertas */
         .alert {
-            padding: 15px;
-            border-radius: 5px;
+            padding: 15px 20px;
+            border-radius: 10px;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .alert-success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
+        .alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .alert-error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .alert-info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
 
-        .alert-error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .alert-info {
-            background-color: #d1ecf1;
-            color: #0c5460;
-            border: 1px solid #bee5eb;
-        }
-
-        /* Estilos para estadísticas */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 32px;
-            font-weight: bold;
-            color: var(--secondary-color);
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            font-size: 14px;
-            color: #666;
+        /* Highlight de búsqueda */
+        .highlight {
+            background-color: #fff3cd;
+            padding: 0 2px;
+            border-radius: 3px;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            nav ul {
-                gap: 15px;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .video-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .search-bar {
-                flex-direction: column;
-            }
-
-            .search-bar input, .search-bar button {
-                width: 100%;
-            }
+            .search-hero { padding: 25px; }
+            .search-hero h2 { font-size: 22px; }
+            .quick-stats { flex-direction: column; align-items: flex-start; }
+            .theme-videos { grid-template-columns: 1fr; padding: 15px; }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="container header-content">
             <div class="logo">
                 <i class="fas fa-play-circle"></i>
-                <h1>Videos de Apoyo Docente<span> - DIRAGE</span></h1>
+                <h1>Videos de Apoyo Docente <span>- DIRAGE</span></h1>
+            </div>
+            <div class="header-stats">
+                <div class="header-stat">
+                    <i class="fas fa-video"></i>
+                    <span class="number" id="header-total">0</span>
+                    <span>videos</span>
+                </div>
+                <div class="header-stat">
+                    <i class="fas fa-tags"></i>
+                    <span class="number" id="header-themes">0</span>
+                    <span>temas</span>
+                </div>
                 <span id="connection-status" class="connection-status disconnected">
-                    <i class="fas fa-circle"></i> Desconectado
+                    <i class="fas fa-circle"></i> Conectando...
                 </span>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="#" class="active" data-page="videos"><i class="fas fa-video"></i> Videos</a></li>
-                    <li><a href="#" data-page="stats"><i class="fas fa-chart-bar"></i> Estadísticas</a></li>
-                   <!-- <li><a href="#" data-page="docs"><i class="fas fa-file-alt"></i> Ayuda</a></li>-->
-                </ul>
-            </nav>
         </div>
     </header>
 
-    <!-- Contenido principal -->
     <div class="container">
-        <!-- Panel de videos (página principal) -->
-        <div id="videos-page" class="page-content">
-            <div class="main-content">
-                <!-- Sidebar -->
-                <aside class="sidebar">
-                    <h2 class="section-title"><i class="fas fa-filter"></i> Temas</h2>
-                    <ul class="theme-list" id="theme-list">
-                        <li class="theme-item active">
-                            Todos
-                            <span class="theme-count">0</span>
-                        </li>
-                        <!-- Los temas se cargarán dinámicamente -->
-                    </ul>
-
-                   
-                </aside>
-
-                <!-- Contenido principal -->
-                <main class="content">
-                    <div class="search-bar">
-                        <input type="text" id="search-input" placeholder="Buscar videos por título, tema, etiquetas...">
-                        <button id="search-btn" class="search-btn"><i class="fas fa-search"></i> Buscar</button>
-                        <button id="refresh-btn" class="btn btn-accent" style="width: auto;">
-                            <i class="fas fa-sync-alt"></i> Actualizar
-                        </button>
-                    </div>
-
-                    <h2 class="section-title">
-                        <i class="fas fa-play-circle"></i> Videos Disponibles 
-                        <span id="video-count" style="font-size: 14px; color: #666; margin-left: 10px;">(cargando...)</span>
-                    </h2>
-                    
-                    <div id="alert-container"></div>
-                    
-                    <div class="video-grid" id="video-grid">
-                        <div class="loading-message" id="loading-message">
-                            <div class="loading-spinner"></div>
-                            <p>Cargando videos desde Google Sheets...</p>
-                        </div>
-                    </div>
-                </main>
+        <!-- Hero con búsqueda en tiempo real -->
+        <div class="search-hero">
+            <h2><i class="fas fa-search"></i> Encuentra el video que necesitas</h2>
+            <p>Explora nuestra colección de videos organizados por temas para apoyar tu labor docente</p>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Escribe para buscar por título, tema, descripción o etiquetas...">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="search-info">
+                <i class="fas fa-magic"></i> Búsqueda en tiempo real - Los resultados se actualizan mientras escribes
             </div>
         </div>
-        <!-- Página de estadísticas -->
-        <div id="stats-page" class="page-content" style="display: none;">
-            <div class="content">
-                <h2 class="section-title"><i class="fas fa-chart-bar"></i> Estadísticas de Videos</h2>
-                
-                <div class="stats-grid" id="stats-grid">
-                    <!-- Estadísticas se cargarán dinámicamente -->
+
+        <!-- Stats rápidos -->
+        <div class="quick-stats" id="quick-stats">
+            <div class="quick-stat-item">
+                <i class="fas fa-video"></i>
+                <div class="quick-stat-info">
+                    <span class="quick-stat-value" id="quick-total">0</span>
+                    <span class="quick-stat-label">Videos totales</span>
                 </div>
-                
-                <h3 class="section-title"><i class="fas fa-list"></i> Distribución por Tema</h3>
-                <div id="themes-chart" style="background-color: white; padding: 20px; border-radius: 8px; box-shadow: var(--shadow); margin-top: 20px;">
-                    <p>Los datos se cargarán cuando se conecte a la hoja de cálculo...</p>
+            </div>
+            <div class="quick-stat-item">
+                <i class="fas fa-check-circle"></i>
+                <div class="quick-stat-info">
+                    <span class="quick-stat-value" id="quick-active">0</span>
+                    <span class="quick-stat-label">Videos activos</span>
+                </div>
+            </div>
+            <div class="quick-stat-item">
+                <i class="fas fa-tags"></i>
+                <div class="quick-stat-info">
+                    <span class="quick-stat-value" id="quick-themes">0</span>
+                    <span class="quick-stat-label">Temas disponibles</span>
+                </div>
+            </div>
+            <div class="quick-stat-item">
+                <i class="fas fa-star"></i>
+                <div class="quick-stat-info">
+                    <span class="quick-stat-value" id="quick-rated">0</span>
+                    <span class="quick-stat-label">Videos destacados</span>
                 </div>
             </div>
         </div>
 
+        <!-- Filtros rápidos -->
+        <div class="filters-bar">
+            <div class="filters-header">
+                <h3><i class="fas fa-filter"></i> Filtrar por tema</h3>
+                <div class="filter-buttons" id="filter-buttons">
+                    <button class="filter-chip active" data-filter="all">Todos los temas</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resultados de búsqueda -->
+        <div id="search-results-info" class="search-results-info" style="display: none;">
+            <div class="results-count">
+                <i class="fas fa-search"></i> Se encontraron <strong id="results-count">0</strong> resultados para "<span id="search-term"></span>"
+            </div>
+            <button class="clear-search" id="clear-search">
+                <i class="fas fa-times"></i> Limpiar búsqueda
+            </button>
+        </div>
+
+        <!-- Alertas -->
+        <div id="alert-container"></div>
+
+        <!-- Videos organizados por temas (sectores) -->
+        <div id="themes-container">
+            <div class="loading-message" id="loading-message">
+                <div class="loading-spinner"></div>
+                <p>Cargando videos desde Google Sheets...</p>
+            </div>
+        </div>
     </div>
 
-    <!-- Modal para ver video -->
+    <!-- Modal -->
     <div id="video-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -652,425 +737,281 @@
                 <span class="close-modal">&times;</span>
             </div>
             <div class="video-container">
-                <iframe id="modal-video" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe id="modal-video" src="" frameborder="0" allowfullscreen></iframe>
             </div>
-            <div id="modal-info">
-                <!-- Información del video se cargará aquí -->
-            </div>
+            <div class="modal-info" id="modal-info"></div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container footer-content">
-            <div class="copyright">
-                <p>&copy; 2026 Video de Apoyo DIRAGE - Visualizador de Videos</p>
-                <p style="font-size: 12px; margin-top: 5px;">Los videos se gestionan directamente desde DIRAGE</p>
-            </div>
-            <div class="footer-links">
-        <!--         <a href="#" data-page="docs"><i class="fas fa-question-circle"></i> Ayuda</a>
-               <a href="https://docs.google.com/spreadsheets/d/1w3cle3iuRxLrK20YuC51xzc8--celSCWEmLjIxbvVoA/edit" target="_blank">
-                    <i class="fas fa-external-link-alt"></i> Ver Hoja
-                </a>-->
-            </div>
-        </div>
+    <footer style="background: var(--primary-color); color: white; text-align: center; padding: 20px; margin-top: 40px;">
+        <p>&copy; 2026 Video de Apoyo DIRAGE - Visualizador de Videos</p>
     </footer>
 
     <script>
-    // Configuración - ID de tu hoja de cálculo
     const SHEET_ID = '1w3cle3iuRxLrK20YuC51xzc8--celSCWEmLjIxbvVoA';
-    
-    // IMPORTANTE: Reemplaza esta URL con la de TU Google Apps Script
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwhPA8DJJzcPBbuhV_euCi6otp_wQ0wNf2uXWO1YNaIz-Ao9eBb9Wmx2rAHFUbPJxDr/exec';
-    
     let videos = [];
+    let currentSearchTerm = '';
     let currentFilter = 'all';
-    let isLoading = false;
+    let searchTimeout = null;
 
-    // Inicializar la aplicación cuando se carga la página
     document.addEventListener('DOMContentLoaded', function() {
         initApp();
         loadVideos();
     });
 
     async function loadVideos() {
-        if (isLoading) return;
-        
-        isLoading = true;
         showLoading(true);
         updateConnectionStatus('Conectando...');
         
         try {
-            // Usar la API pública de Google Sheets para leer datos
             const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
-            
             const response = await fetch(url);
             
-            if (!response.ok) {
-                throw new Error(`Error HTTP: ${response.status}`);
-            }
+            if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
             
             const text = await response.text();
-            // Google Sheets devuelve los datos en un formato especial, necesitamos procesarlos
             const jsonText = text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1);
             const data = JSON.parse(jsonText);
             
-            // Verificar si hay datos
             if (!data.table || !data.table.rows) {
                 videos = [];
-                showAlert('La hoja de cálculo está vacía o no tiene datos.', 'info');
+                showAlert('La hoja de cálculo está vacía', 'info');
+                renderByThemes([]);
                 updateConnectionStatus('Conectado');
-                renderVideos([]);
                 return;
             }
             
-            // Extraer encabezados de columna
             const headers = data.table.cols.map(col => col.label);
-            
-            // Convertir filas a objetos
             videos = data.table.rows.map((row, index) => {
                 const video = {};
                 headers.forEach((header, colIndex) => {
-                    if (row.c && row.c[colIndex]) {
-                        video[header] = row.c[colIndex].v || '';
-                    } else {
-                        video[header] = '';
-                    }
+                    video[header] = (row.c && row.c[colIndex]) ? row.c[colIndex].v || '' : '';
                 });
-                
-                // Asegurar que tenemos un ID
-                if (!video.id || video.id === '') {
-                    video.id = index + 1;
-                }
-                
+                if (!video.id || video.id === '') video.id = index + 1;
                 return video;
             });
             
             updateConnectionStatus('Conectado');
-            showAlert(`Se cargaron ${videos.length} videos correctamente.`, 'success');
-            renderVideos(videos);
-            renderThemes();
+            showAlert(`✅ Se cargaron ${videos.length} videos`, 'success');
             updateStats();
+            renderFilterButtons();
+            applyFiltersAndSearch();
             
         } catch (error) {
-            console.error('Error cargando videos:', error);
+            console.error('Error:', error);
             updateConnectionStatus('Desconectado');
-            showAlert(`Error al cargar videos: ${error.message}. Asegúrate de que la hoja esté compartida públicamente.`, 'error');
-            renderVideos([]);
+            showAlert(`Error: ${error.message}`, 'error');
+            renderByThemes([]);
         } finally {
-            isLoading = false;
             showLoading(false);
         }
     }
 
-    function initApp() {
-        // Navegación entre páginas
-        const navLinks = document.querySelectorAll('nav a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const page = this.getAttribute('data-page');
-                
-                // Actualizar estado activo en navegación
-                navLinks.forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Mostrar página seleccionada
-                document.querySelectorAll('.page-content').forEach(p => {
-                    p.style.display = 'none';
-                });
-                document.getElementById(`${page}-page`).style.display = 'block';
-                
-                // Actualizar estadísticas si es necesario
-                if (page === 'stats') {
-                    updateStats();
-                }
+    function updateStats() {
+        const activeVideos = videos.filter(v => {
+            const status = v.status || 'active';
+            return status === 'active' || status === 'Active' || status === 'Activo';
+        });
+        
+        const uniqueThemes = new Set(activeVideos.map(v => v.theme).filter(t => t));
+        const ratedVideos = activeVideos.filter(v => v.rating && parseFloat(v.rating) > 0);
+        
+        document.getElementById('header-total').textContent = videos.length;
+        document.getElementById('header-themes').textContent = uniqueThemes.size;
+        document.getElementById('quick-total').textContent = videos.length;
+        document.getElementById('quick-active').textContent = activeVideos.length;
+        document.getElementById('quick-themes').textContent = uniqueThemes.size;
+        document.getElementById('quick-rated').textContent = ratedVideos.length;
+    }
+
+    function renderFilterButtons() {
+        const activeVideos = videos.filter(v => {
+            const status = v.status || 'active';
+            return status === 'active' || status === 'Active' || status === 'Activo';
+        });
+        
+        const themes = [...new Set(activeVideos.map(v => v.theme).filter(t => t))];
+        const container = document.getElementById('filter-buttons');
+        
+        // Limpiar excepto el botón "Todos"
+        container.innerHTML = '<button class="filter-chip active" data-filter="all">Todos los temas</button>';
+        
+        themes.forEach(theme => {
+            const btn = document.createElement('button');
+            btn.className = 'filter-chip';
+            btn.setAttribute('data-filter', theme);
+            btn.textContent = theme.charAt(0).toUpperCase() + theme.slice(1);
+            btn.onclick = () => {
+                document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = theme;
+                applyFiltersAndSearch();
+            };
+            container.appendChild(btn);
+        });
+    }
+
+    function filterVideos() {
+        let filtered = videos.filter(v => {
+            const status = v.status || 'active';
+            return status === 'active' || status === 'Active' || status === 'Activo';
+        });
+        
+        if (currentFilter !== 'all') {
+            filtered = filtered.filter(v => v.theme === currentFilter);
+        }
+        
+        if (currentSearchTerm) {
+            const term = currentSearchTerm.toLowerCase();
+            filtered = filtered.filter(v => 
+                (v.title && v.title.toLowerCase().includes(term)) ||
+                (v.description && v.description.toLowerCase().includes(term)) ||
+                (v.theme && v.theme.toLowerCase().includes(term)) ||
+                (v.tags && v.tags.toLowerCase().includes(term))
+            );
+        }
+        
+        return filtered;
+    }
+
+    function applyFiltersAndSearch() {
+        const filtered = filterVideos();
+        
+        // Mostrar/ocultar info de búsqueda
+        const searchInfo = document.getElementById('search-results-info');
+        if (currentSearchTerm) {
+            searchInfo.style.display = 'flex';
+            document.getElementById('results-count').textContent = filtered.length;
+            document.getElementById('search-term').textContent = currentSearchTerm;
+        } else {
+            searchInfo.style.display = 'none';
+        }
+        
+        renderByThemes(filtered);
+    }
+
+    function renderByThemes(videosToRender) {
+        const container = document.getElementById('themes-container');
+        
+        if (videosToRender.length === 0) {
+            container.innerHTML = `
+                <div class="loading-message">
+                    <i class="fas fa-search" style="font-size: 48px; color: #ccc; margin-bottom: 20px; display: block;"></i>
+                    <p>No se encontraron videos que coincidan con tu búsqueda.</p>
+                    ${currentSearchTerm ? `<button onclick="clearSearch()" style="margin-top: 15px; padding: 8px 20px; background: var(--secondary-color); color: white; border: none; border-radius: 20px; cursor: pointer;">Limpiar búsqueda</button>` : ''}
+                </div>
+            `;
+            return;
+        }
+        
+        // Agrupar por tema
+        const grouped = {};
+        videosToRender.forEach(video => {
+            const theme = video.theme || 'Sin tema';
+            if (!grouped[theme]) grouped[theme] = [];
+            grouped[theme].push(video);
+        });
+        
+        // Ordenar temas por cantidad de videos
+        const sortedThemes = Object.keys(grouped).sort((a, b) => grouped[b].length - grouped[a].length);
+        
+        container.innerHTML = '';
+        
+        sortedThemes.forEach(theme => {
+            const themeVideos = grouped[theme];
+            const section = document.createElement('div');
+            section.className = 'theme-section';
+            
+            const themeName = theme.charAt(0).toUpperCase() + theme.slice(1);
+            
+            section.innerHTML = `
+                <div class="theme-header" data-theme="${theme}">
+                    <h3>
+                        <i class="fas fa-folder-open"></i>
+                        ${themeName}
+                        <span class="count">${themeVideos.length} videos</span>
+                    </h3>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="theme-videos" id="videos-${theme.replace(/[^a-zA-Z0-9]/g, '-')}">
+                    ${renderVideoCards(themeVideos)}
+                </div>
+            `;
+            
+            container.appendChild(section);
+            
+            // Evento para colapsar/expandir
+            const header = section.querySelector('.theme-header');
+            const videosDiv = section.querySelector('.theme-videos');
+            header.addEventListener('click', () => {
+                header.classList.toggle('collapsed');
+                videosDiv.classList.toggle('collapsed');
             });
         });
+        
+        // Agregar eventos a las tarjetas
+        attachVideoEvents();
+    }
 
-        // Botón de actualizar
-        document.getElementById('refresh-btn').addEventListener('click', function() {
-            loadVideos();
-        });
-
-        // Manejar búsqueda
-        document.getElementById('search-btn').addEventListener('click', performSearch);
-        document.getElementById('search-input').addEventListener('keyup', function(e) {
-            if (e.key === 'Enter') {
-                performSearch();
+    function renderVideoCards(videosList) {
+        return videosList.map(video => {
+            const videoId = extractYouTubeId(video.url);
+            const thumbnail = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : 'https://via.placeholder.com/300x160/cccccc/666666?text=Video';
+            const themeName = (video.theme || 'Sin tema').charAt(0).toUpperCase() + (video.theme || 'Sin tema').slice(1);
+            const duration = video.duration || '0:00';
+            const date = video.date_added || 'Fecha desconocida';
+            
+            // Resaltar texto de búsqueda en título y descripción
+            let title = video.title || 'Sin título';
+            let description = video.description || 'Sin descripción';
+            
+            if (currentSearchTerm) {
+                const regex = new RegExp(`(${currentSearchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                title = title.replace(regex, '<mark class="highlight">$1</mark>');
+                description = description.replace(regex, '<mark class="highlight">$1</mark>');
             }
-        });
+            
+            return `
+                <div class="video-card" data-id="${video.id}">
+                    <div class="video-thumbnail">
+                        <img src="${thumbnail}" alt="${video.title || 'Sin título'}" loading="lazy">
+                        <span class="video-duration">${duration}</span>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">${title}</div>
+                        <div class="video-description">${description}</div>
+                        <div class="video-meta">
+                            <span><i class="far fa-calendar"></i> ${date}</span>
+                            ${video.rating ? `<span><i class="fas fa-star" style="color: #f39c12;"></i> ${video.rating}</span>` : ''}
+                        </div>
+                        ${video.tags ? `<div class="video-tags">${video.tags.split(',').map(t => `<span class="tag">${t.trim()}</span>`).join('')}</div>` : ''}
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
 
-        // Manejar cierre del modal
-        document.querySelector('.close-modal').addEventListener('click', closeModal);
-        document.getElementById('video-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
+    function attachVideoEvents() {
+        document.querySelectorAll('.video-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const videoId = card.getAttribute('data-id');
+                const video = videos.find(v => v.id == videoId);
+                if (video) openModal(video);
+            });
         });
     }
 
     function extractYouTubeId(url) {
         if (!url) return null;
-        
         const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
         const match = url.match(regExp);
-        
-        if (match && match[2].length === 11) {
-            return match[2];
-        }
-        
-        // También intentar con formato youtu.be
-        const shortRegExp = /youtu\.be\/([^#&?]*)/;
-        const shortMatch = url.match(shortRegExp);
-        
-        if (shortMatch && shortMatch[1].length === 11) {
-            return shortMatch[1];
-        }
-        
+        if (match && match[2].length === 11) return match[2];
+        const shortMatch = url.match(/youtu\.be\/([^#&?]*)/);
+        if (shortMatch && shortMatch[1].length === 11) return shortMatch[1];
         return null;
-    }
-
-    function renderThemes() {
-        const themeList = document.getElementById('theme-list');
-        
-        // Contar videos por tema (solo activos)
-        const themeCounts = {};
-        const activeVideos = videos.filter(v => {
-            const status = v.status || 'active';
-            return (status === 'active' || status === 'Active' || status === 'Activo');
-        });
-        
-        activeVideos.forEach(video => {
-            const theme = video.theme || 'Sin tema';
-            themeCounts[theme] = (themeCounts[theme] || 0) + 1;
-        });
-        
-        // Limpiar lista
-        themeList.innerHTML = '';
-        
-        // Agregar "Todos" como primer tema
-        const totalVideos = activeVideos.length;
-        const allThemesItem = document.createElement('li');
-        allThemesItem.className = 'theme-item active';
-        allThemesItem.innerHTML = `
-            Todos
-            <span class="theme-count">${totalVideos}</span>
-        `;
-        allThemesItem.addEventListener('click', function() {
-            document.querySelectorAll('.theme-item').forEach(item => item.classList.remove('active'));
-            this.classList.add('active');
-            currentFilter = 'all';
-            renderVideos(activeVideos);
-        });
-        themeList.appendChild(allThemesItem);
-        
-        // Agregar temas individuales
-        Object.keys(themeCounts).sort().forEach(theme => {
-            const count = themeCounts[theme];
-            
-            const themeItem = document.createElement('li');
-            themeItem.className = 'theme-item';
-            
-            // Capitalizar primera letra del tema
-            const themeName = theme.charAt(0).toUpperCase() + theme.slice(1);
-            
-            themeItem.innerHTML = `
-                ${themeName}
-                <span class="theme-count">${count}</span>
-            `;
-            
-            themeItem.addEventListener('click', function() {
-                document.querySelectorAll('.theme-item').forEach(item => item.classList.remove('active'));
-                this.classList.add('active');
-                currentFilter = theme;
-                const filteredVideos = activeVideos.filter(video => video.theme === theme);
-                renderVideos(filteredVideos);
-            });
-            
-            themeList.appendChild(themeItem);
-        });
-    }
-
-    function renderVideos(videosToRender) {
-        const videoGrid = document.getElementById('video-grid');
-        const videoCount = document.getElementById('video-count');
-        
-        videoCount.textContent = `(${videosToRender.length} videos)`;
-        
-        if (videosToRender.length === 0) {
-            videoGrid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #666;">No hay videos que coincidan con tu búsqueda.</p>';
-            return;
-        }
-        
-        videoGrid.innerHTML = '';
-        
-        videosToRender.forEach(video => {
-            const videoCard = document.createElement('div');
-            videoCard.className = 'video-card';
-            
-            // Obtener nombre del tema para mostrar
-            const theme = video.theme || 'Sin tema';
-            const themeName = theme.charAt(0).toUpperCase() + theme.slice(1);
-            
-            // Extraer ID de YouTube para thumbnail
-            const videoId = extractYouTubeId(video.url);
-            const thumbnail = videoId ? 
-                `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : 
-                'https://via.placeholder.com/300x180/cccccc/666666?text=Video';
-            
-            // Estado del video
-            const status = video.status || 'active';
-            const statusClass = (status === 'active' || status === 'Active' || status === 'Activo') ? 'status-active' : 'status-inactive';
-            const statusText = (status === 'active' || status === 'Active' || status === 'Activo') ? 'Activo' : 'Inactivo';
-            
-            // Duración
-            const duration = video.duration || '0:00';
-            
-            // Fecha
-            const date = video.date_added || 'Fecha desconocida';
-            
-            // Rating
-            const rating = video.rating || 0;
-            
-            videoCard.innerHTML = `
-                <div class="video-thumbnail">
-                    <img src="${thumbnail}" alt="${video.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x180/cccccc/666666?text=Video'">
-                    <span class="video-duration">${duration}</span>
-                </div>
-                <div class="video-info">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                        <span class="video-theme">${themeName}</span>
-                        <span class="${statusClass}" style="font-size: 10px;">${statusText}</span>
-                    </div>
-                    <h3 class="video-title">${video.title || 'Sin título'}</h3>
-                    <p class="video-description">${video.description || 'Sin descripción'}</p>
-                    ${video.tags ? `<p style="font-size: 12px; color: #666; margin-bottom: 10px;"><i class="fas fa-tags"></i> ${video.tags}</p>` : ''}
-                    <div class="video-actions">
-                        <div>
-                            <span class="video-date"><i class="far fa-calendar"></i> ${date}</span>
-                            ${rating > 0 ? `<span style="margin-left: 10px; color: #f39c12;"><i class="fas fa-star"></i> ${rating}</span>` : ''}
-                        </div>
-                        <button class="action-btn view-video-btn" data-id="${video.id}">
-                            <i class="fas fa-play"></i> Ver video
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            videoGrid.appendChild(videoCard);
-        });
-        
-        // Agregar event listeners a los botones de ver video
-        document.querySelectorAll('.view-video-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const videoId = this.getAttribute('data-id');
-                const video = videos.find(v => v.id == videoId);
-                if (video) {
-                    openModal(video);
-                }
-            });
-        });
-    }
-
-    function performSearch() {
-        const searchTerm = document.getElementById('search-input').value.toLowerCase().trim();
-        const activeVideos = videos.filter(v => {
-            const status = v.status || 'active';
-            return (status === 'active' || status === 'Active' || status === 'Activo');
-        });
-        
-        if (!searchTerm) {
-            // Si no hay término de búsqueda, aplicar filtro actual
-            if (currentFilter === 'all' || currentFilter === 'Todos') {
-                renderVideos(activeVideos);
-            } else {
-                const filteredVideos = activeVideos.filter(video => video.theme === currentFilter);
-                renderVideos(filteredVideos);
-            }
-            return;
-        }
-        
-        const filteredVideos = activeVideos.filter(video => 
-            (video.title && video.title.toLowerCase().includes(searchTerm)) ||
-            (video.description && video.description.toLowerCase().includes(searchTerm)) ||
-            (video.theme && video.theme.toLowerCase().includes(searchTerm)) ||
-            (video.tags && video.tags.toLowerCase().includes(searchTerm))
-        );
-        
-        renderVideos(filteredVideos);
-    }
-
-    function updateStats() {
-        const statsGrid = document.getElementById('stats-grid');
-        const themesChart = document.getElementById('themes-chart');
-        
-        if (videos.length === 0) {
-            statsGrid.innerHTML = '<p>No hay datos para mostrar estadísticas.</p>';
-            themesChart.innerHTML = '<p>No hay datos para mostrar gráfico.</p>';
-            return;
-        }
-        
-        // Calcular estadísticas
-        const totalVideos = videos.length;
-        const activeVideos = videos.filter(v => {
-            const status = v.status || 'active';
-            return (status === 'active' || status === 'Active' || status === 'Activo');
-        }).length;
-        
-        // Contar temas únicos
-        const themes = {};
-        videos.forEach(video => {
-            const theme = video.theme || 'Sin tema';
-            themes[theme] = (themes[theme] || 0) + 1;
-        });
-        const uniqueThemes = Object.keys(themes).length;
-        
-        // Videos con rating > 0
-        const ratedVideos = videos.filter(v => v.rating && parseFloat(v.rating) > 0).length;
-        
-        // Renderizar estadísticas
-        statsGrid.innerHTML = `
-            <div class="stat-card">
-                <div class="stat-value">${totalVideos}</div>
-                <div class="stat-label">Videos Totales</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value">${activeVideos}</div>
-                <div class="stat-label">Videos Activos</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value">${uniqueThemes}</div>
-                <div class="stat-label">Temas Diferentes</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value">${ratedVideos}</div>
-                <div class="stat-label">Videos Calificados</div>
-            </div>
-        `;
-        
-        // Renderizar gráfico de temas
-        let chartHTML = '<h4>Videos por Tema</h4>';
-        
-        // Ordenar temas por cantidad
-        const sortedThemes = Object.entries(themes).sort((a, b) => b[1] - a[1]);
-        
-        sortedThemes.forEach(([theme, count]) => {
-            const percentage = Math.round((count / totalVideos) * 100);
-            chartHTML += `
-                <div style="margin-bottom: 10px;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                        <span>${theme}</span>
-                        <span>${count} (${percentage}%)</span>
-                    </div>
-                    <div style="height: 10px; background-color: #ecf0f1; border-radius: 5px; overflow: hidden;">
-                        <div style="height: 100%; width: ${percentage}%; background-color: #3498db; border-radius: 5px;"></div>
-                    </div>
-                </div>
-            `;
-        });
-        
-        themesChart.innerHTML = chartHTML;
     }
 
     function openModal(video) {
@@ -1079,88 +1020,102 @@
         const modalVideo = document.getElementById('modal-video');
         const modalInfo = document.getElementById('modal-info');
         
-        // Configurar contenido del modal
         modalTitle.textContent = video.title || 'Sin título';
         
-        // Asegurar que la URL sea embed
-        let videoUrl = video.url || '';
-        const videoId = extractYouTubeId(videoUrl);
+        const videoId = extractYouTubeId(video.url);
         if (videoId) {
-            modalVideo.src = `https://www.youtube.com/embed/${videoId}`;
+            modalVideo.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
         } else {
-            modalVideo.src = videoUrl;
+            modalVideo.src = video.url;
         }
         
-        // Información adicional del video
-        const theme = video.theme || 'Sin tema';
-        const themeName = theme.charAt(0).toUpperCase() + theme.slice(1);
+        const themeName = (video.theme || 'Sin tema').charAt(0).toUpperCase() + (video.theme || 'Sin tema').slice(1);
         
         modalInfo.innerHTML = `
-            <p><strong>Tema:</strong> ${themeName}</p>
-            <p><strong>Fecha de agregado:</strong> ${video.date_added || 'Fecha desconocida'}</p>
-            <p><strong>Duración:</strong> ${video.duration || '0:00'}</p>
-            ${video.description ? `<p><strong>Descripción:</strong> ${video.description}</p>` : ''}
-            ${video.tags ? `<p><strong>Etiquetas:</strong> ${video.tags}</p>` : ''}
-            ${video.views ? `<p><strong>Vistas:</strong> ${video.views}</p>` : ''}
-            ${video.rating ? `<p><strong>Calificación:</strong> ${video.rating}/5</p>` : ''}
-            ${video.created_by ? `<p><strong>Agregado por:</strong> ${video.created_by}</p>` : ''}
+            <p><strong><i class="fas fa-tag"></i> Tema:</strong> ${themeName}</p>
+            <p><strong><i class="far fa-calendar"></i> Fecha:</strong> ${video.date_added || 'Fecha desconocida'}</p>
+            <p><strong><i class="fas fa-clock"></i> Duración:</strong> ${video.duration || '0:00'}</p>
+            ${video.description ? `<p><strong><i class="fas fa-align-left"></i> Descripción:</strong> ${video.description}</p>` : ''}
+            ${video.tags ? `<p><strong><i class="fas fa-tags"></i> Etiquetas:</strong> ${video.tags}</p>` : ''}
         `;
         
-        // Mostrar modal
         modal.style.display = 'flex';
     }
 
     function closeModal() {
         const modal = document.getElementById('video-modal');
         const modalVideo = document.getElementById('modal-video');
-        
-        // Detener video al cerrar modal
         modalVideo.src = '';
         modal.style.display = 'none';
     }
 
+    function handleSearch() {
+        const searchInput = document.getElementById('search-input');
+        currentSearchTerm = searchInput.value.trim();
+        applyFiltersAndSearch();
+    }
+
+    function clearSearch() {
+        const searchInput = document.getElementById('search-input');
+        searchInput.value = '';
+        currentSearchTerm = '';
+        applyFiltersAndSearch();
+        searchInput.focus();
+    }
+
+    function debounceSearch() {
+        if (searchTimeout) clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            handleSearch();
+        }, 300); // Debounce de 300ms para mejor rendimiento
+    }
+
+    function initApp() {
+        // Búsqueda en tiempo real (mientras escribes)
+        const searchInput = document.getElementById('search-input');
+        searchInput.addEventListener('input', debounceSearch);
+        
+        // Botón de limpiar búsqueda
+        document.getElementById('clear-search').addEventListener('click', clearSearch);
+        
+        // Botón de actualizar
+        const refreshBtn = document.getElementById('refresh-btn');
+        if (refreshBtn) refreshBtn.addEventListener('click', () => loadVideos());
+        
+        // Cierre del modal
+        document.querySelector('.close-modal')?.addEventListener('click', closeModal);
+        document.getElementById('video-modal')?.addEventListener('click', (e) => {
+            if (e.target === document.getElementById('video-modal')) closeModal();
+        });
+    }
+
     function updateConnectionStatus(status) {
-        const statusElement = document.getElementById('connection-status');
+        const el = document.getElementById('connection-status');
         if (status === 'Conectado') {
-            statusElement.innerHTML = '<i class="fas fa-circle" style="color: #28a745;"></i> Conectado';
-            statusElement.className = 'connection-status connected';
+            el.innerHTML = '<i class="fas fa-circle"></i> Conectado';
+            el.className = 'connection-status connected';
         } else if (status === 'Desconectado') {
-            statusElement.innerHTML = '<i class="fas fa-circle" style="color: #dc3545;"></i> Desconectado';
-            statusElement.className = 'connection-status disconnected';
-        } else if (status === 'Conectando...') {
-            statusElement.innerHTML = '<i class="fas fa-circle" style="color: #ffc107;"></i> Conectando...';
-            statusElement.className = 'connection-status disconnected';
+            el.innerHTML = '<i class="fas fa-circle"></i> Desconectado';
+            el.className = 'connection-status disconnected';
+        } else {
+            el.innerHTML = '<i class="fas fa-circle"></i> Conectando...';
+            el.className = 'connection-status disconnected';
         }
     }
 
     function showLoading(show) {
-        const loadingElement = document.getElementById('loading-message');
-        if (show) {
-            loadingElement.style.display = 'block';
-        } else {
-            loadingElement.style.display = 'none';
-        }
+        const el = document.getElementById('loading-message');
+        if (el) el.style.display = show ? 'block' : 'none';
     }
 
     function showAlert(message, type) {
-        const alertContainer = document.getElementById('alert-container');
-        
+        const container = document.getElementById('alert-container');
         const alertDiv = document.createElement('div');
         alertDiv.className = `alert alert-${type}`;
-        alertDiv.innerHTML = `
-            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
-            ${message}
-        `;
-        
-        alertContainer.appendChild(alertDiv);
-        
-        // Remover después de 5 segundos
-        setTimeout(() => {
-            if (alertDiv.parentNode) {
-                alertDiv.remove();
-            }
-        }, 5000);
+        alertDiv.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i> ${message}`;
+        container.appendChild(alertDiv);
+        setTimeout(() => alertDiv.remove(), 5000);
     }
-</script>
+    </script>
 </body>
 </html>
